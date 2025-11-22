@@ -10,97 +10,4 @@ spec:
   - port: 80
     targetPort: 80
     nodePort: 30008
-```
 
----
-
-## 🌐 **خطوات الرفع اليدوي على GitHub:**
-
-### **الخطوة 1: إنشاء الملف الأول**
-
-1. افتح: https://github.com/kyuhara9/argocd-sample-app
-
-2. اضغط **"Add file"** → **"Create new file"**
-
-3. في خانة "Name your file"، اكتب:
-```
-   guestbook/deployment.yaml
-```
-
-4. في المحرر الكبير، الصق محتوى `deployment.yaml` (من الأعلى)
-
-5. اضغط **"Commit new file"** (أسفل الصفحة)
-
----
-
-### **الخطوة 2: إنشاء الملف الثاني**
-
-1. في نفس الصفحة، اضغط **"Add file"** → **"Create new file"**
-
-2. اكتب:
-```
-   guestbook/service.yaml
-```
-
-3. الصق محتوى `service.yaml` (من الأعلى)
-
-4. اضغط **"Commit new file"**
-
----
-
-### **الخطوة 3: تحقق من GitHub**
-
-افتح: https://github.com/kyuhara9/argocd-sample-app
-
-يجب أن ترى:
-```
-📁 guestbook/
-  📄 deployment.yaml
-  📄 service.yaml
-```
-
-✅ **الآن Repository جاهز!**
-
----
-
-## 🚀 **إكمال Lab 1 - Deploy في ArgoCD:**
-
-### **الخطوة 1: حذف Application القديم (إذا موجود)**
-
-في ArgoCD UI:
-1. اضغط على `guestbook` (إذا موجود)
-2. اضغط **"Delete"** (أيقونة سلة المهملات)
-3. اكتب `guestbook` للتأكيد
-4. اضغط **OK**
-
----
-
-### **الخطوة 2: إنشاء Application جديد**
-
-1. اضغط **"+ NEW APP"**
-
-2. **املأ النموذج بدقة:**
-
-**GENERAL:**
-```
-Application Name: guestbook
-Project Name: default
-```
-
-**SYNC POLICY:**
-- اضغط على **"Automatic"**
-- ستظهر خيارات إضافية:
-  - ☑️ **PRUNE RESOURCES**
-  - ☑️ **SELF HEAL**
-
-**SOURCE:**
-```
-Repository URL: https://github.com/kyuhara9/argocd-sample-app
-Revision: HEAD
-Path: guestbook
-```
-
-**DESTINATION:**
-```
-Cluster URL: https://kubernetes.default.svc
-Namespace: guestbook
